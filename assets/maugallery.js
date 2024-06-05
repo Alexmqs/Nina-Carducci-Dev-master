@@ -86,7 +86,39 @@ document.addEventListener("DOMContentLoaded", function() {
         const lightbox = document.getElementById(lightboxId);
         if (lightbox) {
             lightbox.querySelector(".lightboxImage").src = element.src;
-            lightbox.classList.add("show");
+            lightbox.style.display = "block";
+            setTimeout(() => {
+                lightbox.classList.add("show");
+            }, 10); // Small timeout to trigger the transition
+            document.body.classList.add("modal-open");
+
+            // Add a dark overlay
+            const overlay = document.createElement("div");
+            overlay.classList.add("modal-backdrop", "fade");
+            document.body.appendChild(overlay);
+            setTimeout(() => {
+                overlay.classList.add("show");
+            }, 10); // Small timeout to trigger the transition
+        }
+    }
+
+    function closeLightBox(lightboxId) {
+        const lightbox = document.getElementById(lightboxId);
+        if (lightbox) {
+            lightbox.classList.remove("show");
+            const overlay = document.querySelector(".modal-backdrop");
+            if (overlay) {
+                overlay.classList.remove("show");
+            }
+            setTimeout(() => {
+                lightbox.style.display = "none";
+                document.body.classList.remove("modal-open");
+
+                // Remove the dark overlay
+                if (overlay) {
+                    document.body.removeChild(overlay);
+                }
+            }, 300); // Delay to match the transition duration
         }
     }
 
@@ -174,6 +206,13 @@ document.addEventListener("DOMContentLoaded", function() {
         dialog.appendChild(content);
         lightbox.appendChild(dialog);
         gallery.appendChild(lightbox);
+
+        // Close modal on outside click
+        lightbox.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                closeLightBox(lightboxId);
+            }
+        });
     }
 
     function showItemTags(gallery, position, tags) {
@@ -231,6 +270,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 prevImage(options.lightboxId);
             } else if (event.target.classList.contains("mg-next")) {
                 nextImage(options.lightboxId);
+            }
+        });
+
+        // Close modal on Escape key press
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeLightBox(options.lightboxId);
             }
         });
     }
