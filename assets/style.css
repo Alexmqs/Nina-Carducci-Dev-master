@@ -90,9 +90,40 @@ body {
 	font-size: 14px;
 }
 
-#gallery {
-	/*	min-height: 100vh; */
-}
+/* Overlay for the modal background */
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: 1040;
+  }
+  
+  .modal-backdrop.show {
+	opacity: 1;
+  }
+  
+  /* Modal transitions */
+  .modal.fade .modal-dialog {
+	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	transform: translateY(-50px);
+	opacity: 0;
+  }
+  
+  .modal.show .modal-dialog {
+	transform: translateY(0);
+	opacity: 1;
+  }
+  
+  /* Disable scrolling when modal is open */
+  body.modal-open {
+	overflow: hidden;
+  }
+  
 .title{
 	text-align: center;
 	padding-block: 2em;
