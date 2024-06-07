@@ -90,7 +90,6 @@ body {
 	font-size: 14px;
 }
 
-/* Overlay for the modal background */
 .modal-backdrop {
 	position: fixed;
 	top: 0;
@@ -107,7 +106,6 @@ body {
 	opacity: 1;
   }
   
-  /* Modal transitions */
   .modal.fade .modal-dialog {
 	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 	transform: translateY(-50px);
@@ -119,7 +117,6 @@ body {
 	opacity: 1;
   }
   
-  /* Disable scrolling when modal is open */
   body.modal-open {
 	overflow: hidden;
   }
@@ -177,7 +174,8 @@ body {
 .quote__text {
 	font-family: Spectral;
 	font-style: italic;
-	font-weight: 300;
+	font-weight: 400;
+	font-size: 20px;
 
 }
 .quote__author {
